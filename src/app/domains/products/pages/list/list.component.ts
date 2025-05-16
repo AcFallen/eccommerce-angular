@@ -3,6 +3,7 @@ import { ProductComponent } from '../../components/product/product.component';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { Product } from '../../../shared/models/product.model';
 import { CartService } from '../../../shared/services/cart.service';
+import { ProductService } from '../../../shared/services/product.service';
 @Component({
   selector: 'app-list',
   imports: [ProductComponent, HeaderComponent],
@@ -10,36 +11,14 @@ import { CartService } from '../../../shared/services/cart.service';
 })
 export class ListComponent {
   private cartService = inject(CartService);
-  products: Product[] = [
-    {
-      id: 1,
-      title: 'Product 1',
-      price: 100,
-      img: 'https://picsum.photos/400/400?r=' + Math.random(),
-      description: 'This is the description of the product 1',
-    },
-    {
-      id: 2,
-      title: 'Product 2',
-      price: 200,
-      img: 'https://picsum.photos/400/400?r=' + Math.random(),
-      description: 'This is the description of the product 2',
-    },
-    {
-      id: 3,
-      title: 'Product 3',
-      price: 300,
-      img: 'https://picsum.photos/400/400?r=' + Math.random(),
-      description: 'This is the description of the product 3',
-    },
-    {
-      id: 4,
-      title: 'Product 4',
-      price: 400,
-      img: 'https://picsum.photos/400/400?r=' + Math.random(),
-      description: 'This is the description of the product 4',
-    },
-  ];
+  private productService = inject(ProductService);
+  products = signal<Product[]>([]);
+  
+  ngOnInit() {
+    this.productService.getProducts().subscribe((products) => {
+      this.products.set(products);
+    });
+  }
 
   addToCartHandler(product: Product) {
     this.cartService.addToCart(product);
