@@ -13,10 +13,15 @@ export class ListComponent {
   private cartService = inject(CartService);
   private productService = inject(ProductService);
   products = signal<Product[]>([]);
-  
+
   ngOnInit() {
-    this.productService.getProducts().subscribe((products) => {
-      this.products.set(products);
+    this.productService.getProducts().subscribe({
+      next: (products) => {
+        this.products.set(products);
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   }
 
