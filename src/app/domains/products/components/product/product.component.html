@@ -1,10 +1,14 @@
 <div class="rounded-md shadow-md p-4 flex flex-col items-start gap-2">
-  <img [src]="img" alt="product" class="rounded-md w-full h-40 object-cover" />
+  <img
+    [src]="product.img"
+    alt="product"
+    class="rounded-md w-full h-40 object-cover"
+  />
   <div class="flex justify-between w-full items-center">
-    <h2 class="text-lg font-bold">{{ title }}</h2>
-    <p class="text-xl font-bold text-orange-500">S/. {{ price }}</p>
+    <h2 class="text-lg font-bold">{{ product.title }}</h2>
+    <p class="text-xl font-bold text-orange-500">S/. {{ product.price }}</p>
   </div>
-  <p class="text-sm text-gray-500">{{ description }}</p>
+  <p class="text-sm text-gray-500">{{ product.description }}</p>
   <div class="flex justify-end w-full">
     <button
       (click)="addToCartHandler()"

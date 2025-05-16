@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { ProductComponent } from '../../components/product/product.component';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
+import { Product } from '../../../shared/models/product.model';
 @Component({
   selector: 'app-list',
-  imports: [ProductComponent],
+  imports: [ProductComponent, HeaderComponent],
   templateUrl: './list.component.html',
 })
 export class ListComponent {
-  products = [
+  products: Product[] = [
     {
       id: 1,
       title: 'Product 1',
@@ -37,7 +39,9 @@ export class ListComponent {
     },
   ];
 
-  addToCartHandler(event: any) {
-    console.log(event);
+  cartProducts = signal<Product[]>([]);
+
+  addToCartHandler(event: Product) {
+    this.cartProducts.update((prev) => [...prev, event]);
   }
 }
