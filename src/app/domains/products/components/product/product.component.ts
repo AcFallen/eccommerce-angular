@@ -6,13 +6,7 @@ import { Product } from '../../../shared/models/product.model';
   templateUrl: './product.component.html',
 })
 export class ProductComponent {
-  @Input({ required: true }) product: Product = {
-    id: 0,
-    title: '',
-    price: 0,
-    description: '',
-    img: '',
-  };
+  @Input({ required: true }) product!: Product;
 
   @Output() addToCart = new EventEmitter<Product>();
 
