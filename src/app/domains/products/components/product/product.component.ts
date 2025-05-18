@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-product',
   imports: [CommonModule],
   templateUrl: './product.component.html',
+  standalone: true,
 })
 export class ProductComponent {
   @Input({ required: true }) product!: Product;
